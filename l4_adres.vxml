@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<vxml version="2.0" application="l4.vxml">
+
+<form id="address">
+  <var name="final_counter"/>
+
+  <field name="street">
+    <prompt bargein="false">
+	Please give your street name.
+    </prompt>
+    <grammar>
+	<rule>
+		<one-of>
+      			<item>Bryant</item>
+      			<item>Iverson</item>
+      			<item>Jordan</item>
+      			<item>Gortat</item>
+      			<item>Nash</item>
+      			<item>Nowitzki</item>
+    		</one-of>
+	</rule>
+    </grammar>
+  </field>
+  <field name="building" type="number">
+    <prompt bargein="false">
+	Please give your building number.
+    </prompt>
+  </field>
+  <field name="local" type="number">
+    <prompt bargein="false">
+	Please give your local number.
+    </prompt>
+  </field>
+  <field name="correct">
+    <prompt>
+        Order containing <value expr="final_counter"/> dishes requested for <value expr="street"/> street, building number <value expr="building"/>, local number <value expr="local"/>. Is it the correct address?
+    </prompt>
+    <grammar>
+	<rule>
+		<one-of>
+      			<item>yes</item>
+      			<item>no</item>
+    		</one-of>
+	</rule>
+     </grammar>
+  </field>
+  <filled>
+    <return namelist="correct"/>
+  </filled>
+</form>
+
+</vxml>

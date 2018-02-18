@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.0" application="l4.vxml">
+
+<form id="name">
+   <block>
+      <prompt bargein="false" >
+        Do you have any additional requirements?
+      </prompt>
+   </block>
+   <record name="additional_r" maxtime="3s" dtmfterm="true" beep="true">
+      <prompt>
+        At the tone, please record it.
+      </prompt>
+      <noinput>
+        Sorry. I didn't hear you. Now returning to the main menu.
+        <exit />
+      </noinput>
+    </record>
+  <field id="confirmation" name="confirmation">
+    <grammar>
+	<rule>
+	   <one-of>
+      		<item>record</item>
+      		<item>no</item>
+	   </one-of>
+	</rule>
+     </grammar>
+     <prompt bargein="false">
+        You record:
+        <break size="small"/>
+        <audio expr="additional_r"/>
+	Do you want record again?
+     </prompt>
+  </field>
+  <block>
+          <return namelist="confirmation"/>
+  </block>
+</form>
+
+</vxml>

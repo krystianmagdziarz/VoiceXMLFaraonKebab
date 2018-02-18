@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<vxml version="2.0">
+ 
+<var name="counter" expr="0"/>
+<var name="another" expr="'yes'"/>
+
+<form id="init"> 
+  <block>
+    <prompt bargein="false">
+      Welcome to the Faraon's Kebab restaurant. We can begin processing your request.
+    </prompt>
+    <goto next="#ord"/>
+  </block>
+</form>
+
+<form id="ord">
+  <subdialog name="ordering" src="l4_zamowienie.vxml">
+    <param name="actual_counter" expr="counter"/>
+    <filled>
+        <assign name="counter" expr="counter + 1"/>
+        <assign name="another" expr="ordering.con"/>
+        <if cond="another=='yes'">
+          <goto next="#ord"/>
+        <else />
+          <prompt bargein="false">Let's get your address.</prompt>
+          <goto next="#addr"/>
+        </if>
+    </filled>
+  </subdialog>
+</form>
+
+<form id="addr">
+  <subdialog name="address" src="l4_adres.vxml">
+    <param name="final_counter" expr="counter"/>
+    <filled>
+        <if cond="address.correct=='yes'">
+            <goto next="#additional_info"/>
+        <else />
+            <goto next="#addr"/>
+        </if>
+    </filled>
+  </subdialog>
+</form>
+
+<form id="additional_info">
+  <subdialog name="additional_info_subdialog" src="l4_record.vxml">
+    <filled>
+        <if cond="additional_info_subdialog.confirmation=='record'">
+            <goto next="#additional_info"/>
+        <else />
+            <goto next="#finish"/>
+        </if>
+    </filled>
+  </subdialog>
+</form>
+
+<form id="finish">
+  <block>
+    <prompt bargein="false">
+      Thank you for your order. Looking forward to hearing from you again soon!
+    </prompt>
+  </block>
+</form>
+
+</vxml>

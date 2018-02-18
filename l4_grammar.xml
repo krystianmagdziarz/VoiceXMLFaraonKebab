@@ -1,0 +1,151 @@
+<?xml version= "1.0" encoding="UTF-8" ?>
+<grammar xmlns="http://www.w3.org/2001/06/grammar" xml:lang="en-US">
+	<rule id="KEBAB" scope="public">
+	<one-of>
+		<item>
+			<ruleref uri="#portion"/>
+		</item>
+		<item>
+			<ruleref uri="#meat"/>
+		</item>
+		<item>
+			<ruleref uri="#sauce"/>
+		</item>
+		<item>
+			<item><ruleref uri="#meat"/><tag>out.meat=rules.meat.meat</tag></item>
+			<item><ruleref uri="#portion"/><tag>out.portion=rules.portion.portion;</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#meat"/><tag>out.meat=rules.meat.meat</tag></item>
+			<item><ruleref uri="#sauce"/><tag>out.sauce=rules.sauce.sauce;</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#sauce"/><tag>out.sauce=rules.sauce.sauce;</tag></item>
+			<item><ruleref uri="#meat"/><tag>out.meat=rules.meat.meat</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#sauce"/><tag>out.sauce=rules.sauce.sauce;</tag></item>
+			<item><ruleref uri="#portion"/><tag>out.portion=rules.portion.portion;</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#portion"/><tag>out.portion=rules.portion.portion;</tag></item>
+			<item><ruleref uri="#meat"/><tag>out.meat=rules.meat.meat</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#portion"/><tag>out.portion=rules.portion.portion;</tag></item>
+			<item><ruleref uri="#sauce"/><tag>out.sauce=rules.sauce.sauce;</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#meat"/><tag>out.meat=rules.meat.meat</tag></item>
+			<item><ruleref uri="#portion"/><tag>out.portion=rules.portion.portion;</tag></item>	
+			<item><ruleref uri="#sauce"/><tag>out.sauce=rules.sauce.sauce;</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#meat"/><tag>out.meat=rules.meat.meat</tag></item>
+			<item><ruleref uri="#sauce"/><tag>out.sauce=rules.sauce.sauce;</tag></item>	
+			<item><ruleref uri="#portion"/><tag>out.portion=rules.portion.portion;</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#sauce"/><tag>out.sauce=rules.sauce.sauce;</tag></item>
+			<item><ruleref uri="#meat"/><tag>out.meat=rules.meat.meat</tag></item>
+			<item><ruleref uri="#portion"/><tag>out.portion=rules.portion.portion;</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#sauce"/><tag>out.sauce=rules.sauce.sauce;</tag></item>
+			<item><ruleref uri="#portion"/><tag>out.portion=rules.portion.portion;</tag></item>
+			<item><ruleref uri="#meat"/><tag>out.meat=rules.meat.meat</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#portion"/><tag>out.portion=rules.portion.portion;</tag></item>
+			<item><ruleref uri="#sauce"/><tag>out.sauce=rules.sauce.sauce;</tag></item>
+			<item><ruleref uri="#meat"/><tag>out.meat=rules.meat.meat</tag></item>
+		</item>
+		<item>
+			<item><ruleref uri="#portion"/><tag>out.portion=rules.portion.portion;</tag></item>
+			<item><ruleref uri="#meat"/><tag>out.meat=rules.meat.meat</tag></item>
+			<item><ruleref uri="#sauce"/><tag>out.sauce=rules.sauce.sauce;</tag></item>
+		</item>
+	</one-of>
+	</rule>
+	<rule id="meat" scope="public">
+		<one-of>
+			<item>
+				<item repeat="0-1">
+				  <ruleref uri="#ADDITIONAL"/>
+				</item>
+					<one-of>
+						<item>beef<tag> out.meat = "beef"; </tag></item>
+						<item>chicken<tag> out.meat = "chicken"; </tag></item>
+						<item>mixed<tag> out.meat = "mixed"; </tag></item>
+					</one-of>
+				<item repeat="0-1"> 
+				  <ruleref uri="#ADDITIONAL"/>
+				</item>
+			</item>
+		</one-of>
+	</rule>
+	<rule id="portion" scope="public">
+		<one-of>
+			<item>
+				<item repeat="0-1"> 
+				  <ruleref uri="#ADDITIONAL"/>
+				</item>
+					<one-of>
+						<item>normal<tag> out.portion = "normal"; </tag></item>
+						<item>extended<tag> out.portion = "extended"; </tag></item>
+					</one-of>
+				<item repeat="0-1"> 
+				  <ruleref uri="#ADDITIONAL"/>
+				</item>
+			</item>
+		</one-of>
+	</rule>
+	<rule id="sauce" scope="public">
+		<one-of>
+			<item>
+				<item repeat="0-1">
+				  <ruleref uri="#ADDITIONAL"/>
+				</item>
+					<one-of>
+						<item>mild<tag> out.sauce = "mild"; </tag></item>
+						<item>spicy<tag> out.sauce = "spicy"; </tag></item>
+						<item>mixed<tag> out.sauce = "mixed"; </tag></item>
+						<item>garlic<tag> out.sauce = "garlic"; </tag></item>
+					</one-of>
+				<item repeat="0-1"> 
+				  <ruleref uri="#ADDITIONAL"/>
+				</item>
+			</item>
+		</one-of>
+	</rule>
+	<rule id="pie" scope="public">
+		<one-of>
+			<item>
+				<item repeat="0-1">
+				  <ruleref uri="#ADDITIONAL"/>
+				</item>
+					<one-of>
+						<item>thin<tag> out.pie = "thin"; </tag></item>
+						<item>thick<tag> out.pie = "thick"; </tag></item>
+						<item>with fries<tag> out.pie = "with fries"; </tag></item>
+					</one-of>
+				<item repeat="0-1"> 
+				  <ruleref uri="#ADDITIONAL"/>
+				</item>
+			</item>
+		</one-of>
+	</rule>
+	<rule id="ADDITIONAL" scope="public">
+		<one-of>
+			<item>please</item>
+			<item>for me</item>
+			<item>for me please</item>
+			<item>please for me</item>
+			<item>will be</item>
+			<item>give me</item>
+			<item>me</item>
+			<item>it will be</item>
+			<item>give</item>
+		</one-of>
+	</rule>
+</grammar>

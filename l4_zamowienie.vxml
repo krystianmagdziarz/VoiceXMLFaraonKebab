@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<vxml version="2.0" application="l4.vxml">
+
+<form id="ordering">
+  <var name="actual_counter"/>
+  <block>
+    <prompt cond="actual_counter > 0" bargein="false">So far you have ordered <value expr="actual_counter"/> dishes.</prompt>
+  </block>
+  <field name="kind">
+    <prompt bargein="false">Do you choose a meat dish or a falafel?</prompt>
+    <grammar>
+	<rule>
+		<one-of>
+      			<item>meat</item>
+      			<item>falafel</item>
+    		</one-of>
+	</rule>
+    </grammar>
+  </field>
+  <block>
+	<if cond="kind=='meat'">
+		<goto next="#meat"/>
+        <else />
+		<goto next="#falafel"/>	
+	</if>
+  </block>
+</form>
+
+<form id="meat">
+<grammar src="l4_grammar.xml#KEBAB" type="application/grammar-xml"/>
+  <initial name="myInit">
+      <prompt bargein="false">  
+	 Welcome to the Faraon's Kebab restaurant.<break time="0.5s"/> We can begin processing your request.<break time="0.5s"/> What do you want to order?<break time="0.5s"/>
+      </prompt>
+  </initial>
+  <field name="meat">
+    <prompt bargein="false">Meat is meant to be beef, chicken or mixed?</prompt>
+    <grammar src="l4_grammar.xml#meat" type="application/grammar-xml"/>
+  </field>
+  <field name="sauce">
+    <prompt bargein="false">Sauce mild, spicy, mixed or garlic</prompt>
+    <grammar src="l4_grammar.xml#sauce" type="application/grammar-xml"/>
+  </field>
+  <field name="portion">
+    <prompt bargein="false">Portion normal or extended?</prompt>
+    <grammar src="l4_grammar.xml#portion" type="application/grammar-xml"/>
+  </field>
+  <field name="pie">
+    <prompt bargein="false">Pie thin, thick or maybe you wish a dish in set with fries?</prompt>
+    <grammar src="l4_grammar.xml#pie" type="application/grammar-xml"/>
+  </field>
+  <filled mode="all">
+    	<prompt bargein="false">You said, you want <value expr="meat"/> meat, <value expr="sauce"/> sauce and <value expr="portion"/> portion</prompt>
+	<goto next="#end_order"/>
+  </filled>
+</form>
+
+<form id="falafel">
+  <field name="falafel_fries">
+    <prompt bargein="false">Do you want fries?</prompt>
+    <grammar>
+	<rule>
+		<one-of>
+      			<item>yes</item>
+      			<item>no</item>
+			<item>fries</item>
+			<item>without</item>
+    		</one-of>
+	</rule>
+    </grammar>
+  </field>
+  <block>
+  	<if cond="falafel_type=='yes' &#124;&#124; falafel_type=='fries'">
+		<prompt>You ordered falafel with fries</prompt>
+		<goto next="#end_order"/>
+	<else />
+		<prompt>You ordered falafel without fries</prompt>
+		<goto next="#end_order"/>
+	</if>
+  </block>
+</form>
+      
+<form id="end_order">
+  <field name="con">
+    <prompt bargein="false">Do you want order more?</prompt>
+    <grammar>
+	<rule>
+		<one-of>
+      			<item>yes</item>
+      			<item>no</item>
+    		</one-of>
+	</rule>
+    </grammar>
+  </field>
+  <block>
+    <return namelist="con"/>
+  </block>
+</form>
+
+</vxml>  
