@@ -30,7 +30,7 @@
 <grammar src="l4_grammar.xml#KEBAB" type="application/grammar-xml"/>
   <initial name="myInit">
       <prompt bargein="false">  
-	 Welcome to the Faraon's Kebab restaurant.<break time="0.5s"/> We can begin processing your request.<break time="0.5s"/> What do you want to order?<break time="0.5s"/>
+	 <break time="0.5s"/> What do you want to order?<break time="0.5s"/>
       </prompt>
   </initial>
   <field name="meat">
@@ -70,7 +70,7 @@
     </grammar>
   </field>
   <block>
-  	<if cond="falafel_type=='yes' &#124;&#124; falafel_type=='fries'">
+  	<if cond="falafel_fries=='yes' &#124;&#124; falafel_fries=='fries'">
 		<prompt>You ordered falafel with fries</prompt>
 		<goto next="#end_order"/>
 	<else />

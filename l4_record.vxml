@@ -2,10 +2,23 @@
 <vxml version="2.0" application="l4.vxml">
 
 <form id="name">
-   <block>
+  <field name="add_req">
       <prompt bargein="false" >
         Do you have any additional requirements?
       </prompt>
+    <grammar>
+	<rule>
+		<one-of>
+      			<item>yes</item>
+      			<item>no</item>
+    		</one-of>
+	</rule>
+    </grammar>
+   </field>
+   <block>
+	<if cond="add_req=='no'">
+		<return namelist="confirmation"/>
+	</if>
    </block>
    <record name="additional_r" maxtime="3s" dtmfterm="true" beep="true">
       <prompt>
